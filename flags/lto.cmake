@@ -20,10 +20,18 @@ else()
   polly_add_cache_flag(CMAKE_CXX_FLAGS_INIT "-flto")
   polly_add_cache_flag(CMAKE_C_FLAGS_INIT "-flto")
 
+  if(CMAKE_HOST_WIN32)
+    set(_host_tag "windows")
+  elseif(CMAKE_HOST_APPLE)
+    set(_host_tag "darwin")
+  else()
+    set(_host_tag "linux")
+  endif()
+
   # Fix for "BFD: ... : plugin needed to handle lto object" {
   set(
       CMAKE_AR
-      "${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc-ar"
+      "${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/${_host_tag}-x86_64/bin/arm-linux-androideabi-gcc-ar"
       CACHE
       PATH
       ""
