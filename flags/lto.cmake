@@ -37,17 +37,15 @@ else()
       ""
       FORCE
   )
-  # TODO: alternative 'set(CMAKE_AR "${CMAKE_AR} --plugin=/.../liblto_plugin.so")'?
 
-  if(EXISTS "/bin/true")
-    set(_true_exe "/bin/true")
-  elseif(EXISTS "/usr/bin/true")
-    set(_true_exe "/usr/bin/true")
-  else()
-    polly_fatal_error("'true' executable not found")
-  endif()
-
-  set(CMAKE_RANLIB "${_true_exe}" CACHE PATH "" FORCE)
+  set(
+      CMAKE_RANLIB
+      "${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/${_host_tag}-x86_64/bin/arm-linux-androideabi-gcc-ranlib"
+      CACHE
+      PATH
+      ""
+      FORCE
+  )
   # }
 
 
